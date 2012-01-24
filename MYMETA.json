@@ -1,0 +1,52 @@
+{
+   "abstract" : "Giraffi API Access Module",
+   "author" : [
+      "Akira Horimoto <emperor@gmail.com>"
+   ],
+   "dynamic_config" : 0,
+   "generated_by" : "Module::Install version 1.04, CPAN::Meta::Converter version 2.112600",
+   "license" : [
+      "perl_5"
+   ],
+   "meta-spec" : {
+      "url" : "http://search.cpan.org/perldoc?CPAN::Meta::Spec",
+      "version" : "2"
+   },
+   "name" : "WWW-Giraffi-API",
+   "no_index" : {
+      "directory" : [
+         "inc",
+         "t",
+         "xt"
+      ]
+   },
+   "prereqs" : {
+      "build" : {
+         "requires" : {
+            "ExtUtils::MakeMaker" : "6.36"
+         }
+      },
+      "configure" : {
+         "requires" : {
+            "ExtUtils::MakeMaker" : "6.36"
+         }
+      },
+      "runtime" : {
+         "requires" : {
+            "Class::XSAccessor" : 0,
+            "Crypt::SSLeay" : 0,
+            "JSON::Any" : 0,
+            "LWP::Protocol::https" : 0,
+            "Module::Pluggable" : 0,
+            "Time::Piece" : 0
+         }
+      }
+   },
+   "release_status" : "stable",
+   "resources" : {
+      "license" : [
+         "http://dev.perl.org/licenses/"
+      ]
+   },
+   "version" : "0.1"
+}

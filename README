@@ -1,0 +1,27 @@
+This is Perl module WWW::Giraffi::API.
+
+INSTALLATION
+
+WWW::Giraffi::API installation is straightforward. If your CPAN shell is set up,
+you should just be able to do
+
+    % cpan WWW::Giraffi::API
+
+Download it, unpack it, then build it as per the usual:
+
+    % perl Makefile.PL
+    % make && make test
+
+Then install it:
+
+    % make install
+
+DOCUMENTATION
+
+WWW::Giraffi::API documentation is available as in POD. So you can do:
+
+    % perldoc WWW::Giraffi::API
+
+to read the documentation online with your favorite pager.
+
+holly

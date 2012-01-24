@@ -1,0 +1,30 @@
+---
+abstract: 'Giraffi API Access Module'
+author:
+  - 'Akira Horimoto <emperor@gmail.com>'
+build_requires:
+  ExtUtils::MakeMaker: 6.36
+configure_requires:
+  ExtUtils::MakeMaker: 6.36
+dynamic_config: 0
+generated_by: 'Module::Install version 1.04, CPAN::Meta::Converter version 2.112600'
+license: perl
+meta-spec:
+  url: http://module-build.sourceforge.net/META-spec-v1.4.html
+  version: 1.4
+name: WWW-Giraffi-API
+no_index:
+  directory:
+    - inc
+    - t
+    - xt
+requires:
+  Class::XSAccessor: 0
+  Crypt::SSLeay: 0
+  JSON::Any: 0
+  LWP::Protocol::https: 0
+  Module::Pluggable: 0
+  Time::Piece: 0
+resources:
+  license: http://dev.perl.org/licenses/
+version: 0.1
