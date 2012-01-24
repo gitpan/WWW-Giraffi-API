@@ -6,7 +6,7 @@ use Time::Piece;
 
 use parent qw(WWW::Giraffi::API::Request);
 
-our $VERSION = '0.1';
+our $VERSION = '0.12';
 
 
 sub search {
@@ -41,7 +41,7 @@ WWW::Giraffi::API::MonitoringData - Giraffi API MonitoringData Method Module
 
 =head1 VERSION
 
-0.1
+0.12
 
 =head1 SYNOPSIS
 

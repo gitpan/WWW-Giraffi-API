@@ -15,13 +15,13 @@ use Class::XSAccessor
   #true    => [qw(verbose)],
   replace => 1;
 
-#has api_key => ( is => "rw", isa => "Str" );
+#has apikey => ( is => "rw", isa => "Str" );
 #has timeout => ( is => "rw", isa => "Num" );
 #has verbose => ( is => "rw", isa => "Num" );
 #has ssl_verify_hostname => ( is => "rw", isa => "Num");
 use Module::Pluggable search_path => [__PACKAGE__];
 
-our $VERSION                 = '0.1';
+our $VERSION                 = '0.12';
 our $AGENT                   = sprintf "%s/%s", __PACKAGE__, $VERSION;
 our $SSL_VERIFY_HOSTNAME     = 1;
 our $TIMEOUT                 = 30;
@@ -81,7 +81,7 @@ WWW::Giraffi::API - Giraffi API Access Module
 
 =head1 VERSION
 
-0.1
+0.12
 
 =head1 SYNOPSIS
 
@@ -89,8 +89,8 @@ WWW::Giraffi::API - Giraffi API Access Module
   use warnings;
   use WWW::Giraffi::API;
   
-  my $api_key = "ilovenirvana_ilovekurtcobain";
-  my $g = WWW::Giraffi::API->new(api_key => $api_key);
+  my $apikey = "ilovenirvana_ilovekurtcobain";
+  my $g = WWW::Giraffi::API->new(apikey => $apikey);
   # get all media data
   my $arrayref = $g->media->find;
   foreach $ref(@{$arrayref}) {
@@ -147,12 +147,12 @@ Create WWW::Giraffi::API Object
 
 Example:
 
-  my $api_key = "ilovenirvana_ilovekurtcobain";
-  my $g = WWW::Giraffi::API->new(api_key => $api_key);
+  my $apikey = "ilovenirvana_ilovekurtcobain";
+  my $g = WWW::Giraffi::API->new(apikey => $apikey);
 
 Options
 
-  api_key                   giraffi api_key
+  apikey                   giraffi apikey
   timeout                   connection timeout. default 30sec 
   default_endpoint          default_endpoint. default $DEFAULT_ENDPOINT
   applogs_endpoint          applogs_endpoint. default $MONITORINGDATA_ENDPOINT
@@ -166,7 +166,7 @@ Create WWW::Giraffi::API::Media Object
 
 Example:
 
-  my $g = WWW::Giraffi::API->new(api_key => $api_key);
+  my $g = WWW::Giraffi::API->new(apikey => $apikey);
   my $media = $g->media;
 
 =head2 axion

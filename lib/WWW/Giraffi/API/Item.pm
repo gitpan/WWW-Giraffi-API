@@ -5,7 +5,7 @@ use warnings;
 
 use parent qw(WWW::Giraffi::API::Request);
 
-our $VERSION = '0.1';
+our $VERSION = '0.12';
 
 sub all {
 
@@ -85,7 +85,7 @@ WWW::Giraffi::API::Item - Giraffi API Item Method Item Module
 
 =head1 VERSION
 
-0.1
+0.12
 
 =head1 SYNOPSIS
 
