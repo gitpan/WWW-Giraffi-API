@@ -6,7 +6,7 @@ use Time::Piece;
 
 use parent qw(WWW::Giraffi::API::Request);
 
-our $VERSION = '0.12';
+our $VERSION = '0.13';
 
 sub search_average {
 
@@ -50,7 +50,7 @@ WWW::Giraffi::API::Trend - Giraffi API Axion Trend Method Module
 
 =head1 VERSION
 
-0.12
+0.13
 
 =head1 SYNOPSIS
 

@@ -5,9 +5,9 @@ author:
 build_requires:
   ExtUtils::MakeMaker: 6.36
 configure_requires:
-  ExtUtils::MakeMaker: 6.36
+  ExtUtils::MakeMaker: 0
 dynamic_config: 0
-generated_by: 'Module::Install version 1.04, CPAN::Meta::Converter version 2.112600'
+generated_by: 'ExtUtils::MakeMaker version 6.62, CPAN::Meta::Converter version 2.112600'
 license: perl
 meta-spec:
   url: http://module-build.sourceforge.net/META-spec-v1.4.html
@@ -15,9 +15,8 @@ meta-spec:
 name: WWW-Giraffi-API
 no_index:
   directory:
-    - inc
     - t
-    - xt
+    - inc
 requires:
   Class::XSAccessor: 0
   Crypt::SSLeay: 0
@@ -25,7 +24,4 @@ requires:
   LWP::Protocol::https: 0
   Module::Pluggable: 0
   Time::Piece: 0
-resources:
-  license: http://dev.perl.org/licenses/
-  repository: git://github.com/holly/perl-WWW-Giraffi-API.git
-version: 0.12
+version: 0.13

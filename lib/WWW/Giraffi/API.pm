@@ -21,7 +21,7 @@ use Class::XSAccessor
 #has ssl_verify_hostname => ( is => "rw", isa => "Num");
 use Module::Pluggable search_path => [__PACKAGE__];
 
-our $VERSION                 = '0.12';
+our $VERSION                 = '0.13';
 our $AGENT                   = sprintf "%s/%s", __PACKAGE__, $VERSION;
 our $SSL_VERIFY_HOSTNAME     = 1;
 our $TIMEOUT                 = 30;
@@ -81,7 +81,7 @@ WWW::Giraffi::API - Giraffi API Access Module
 
 =head1 VERSION
 
-0.12
+0.13
 
 =head1 SYNOPSIS
 
@@ -135,6 +135,12 @@ https://lapi.giraffi.jp:3443"
 
 =head2 timeout
 
+=head2 default_endpoint
+
+=head2 applogs_endpoint
+
+=head2 monitoringdata_endpoint
+
 =head2 verbose
 
 =head2 ssl_verify_hostname
@@ -152,11 +158,11 @@ Example:
 
 Options
 
-  apikey                   giraffi apikey
+  apikey                    giraffi apikey
   timeout                   connection timeout. default 30sec 
   default_endpoint          default_endpoint. default $DEFAULT_ENDPOINT
-  applogs_endpoint          applogs_endpoint. default $MONITORINGDATA_ENDPOINT
-  monitoringdata_endpoint   monitoringdata_endpoint. default $APPLOGS_ENDPOINT
+  applogs_endpoint          applogs_endpoint. default $APPLOGS_ENDPOINT
+  monitoringdata_endpoint   monitoringdata_endpoint. default $MONITORINGDATA_ENDPOINT
   verbose                   verbose output. default 0
   ssl_verify_hostname       ssl_verify_hostname(for LWP::UserAgent). default 1
 

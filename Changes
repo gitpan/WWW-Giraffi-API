@@ -1,5 +1,7 @@
 Revision history for Perl extension WWW::Giraffi::API
 
+0.13       Tue Jan 24 17:50:00 JST 2012
+           - pod miss-spell update
 0.12       Tue Jan 24 17:33:00 JST 2012
            - pod miss-spell update
 0.11       Tue Jan 24 17:27:00 JST 2012
