@@ -16,7 +16,6 @@ author_tests 'xt';
 
 test_requires(
 	"Test::More"        => 0,
-	"Test::Fake::HTTPD" => 0,
 );
 auto_set_repository;
 auto_include;

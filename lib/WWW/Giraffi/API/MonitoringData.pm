@@ -6,14 +6,14 @@ use Time::Piece;
 
 use parent qw(WWW::Giraffi::API::Request);
 
-our $VERSION = '0.13';
+our $VERSION = '0.13_01';
 
 
 sub search {
 	# no test
-    my ( $self, $conditions, $convert_time_piece ) = @_;
+    my ( $self, $conditions ) = @_;
     my $arrayref = $self->get( "monitoringdata.json", $conditions );
-	if ($convert_time_piece) {
+	if ($self->use_time_piece) {
 		my $tmp_arrayref = [];
 		foreach my $ref(@{$arrayref}) {
 			$ref->{checked_at} = localtime($ref->{checked_at});
@@ -41,7 +41,7 @@ WWW::Giraffi::API::MonitoringData - Giraffi API MonitoringData Method Module
 
 =head1 VERSION
 
-0.13
+0.13_01
 
 =head1 SYNOPSIS
 
@@ -94,12 +94,12 @@ Return Array Reference:
           }
   ]
 
-unix timestamp will be changed into Time::Piece Object if 1 is passed to the 2nd argument. 
+unix timestamp will be changed into Time::Piece Object.
 
 Example:
 
-  my $convert_time_piece = 1;
-  my $arrayref = $monitoring->search($conditions,$convert_time_piece);
+  $monitoring->use_time_piece(1);
+  my $arrayref = $monitoring->search($conditions);
   # created_at/checked_at is Time::Piece Object
   [
          {

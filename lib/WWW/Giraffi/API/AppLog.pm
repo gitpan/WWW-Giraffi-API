@@ -6,19 +6,19 @@ use Time::Piece;
 
 use parent qw(WWW::Giraffi::API::Request);
 
-our $VERSION = '0.13';
+our $VERSION = '0.13_01';
 
 sub all {
 
-    my ( $self, $convert_time_piece ) = @_;
-	return $self->search(undef, $convert_time_piece);
+    my ( $self ) = @_;
+	return $self->search;
 }
 
 sub search {
 	# no test
-    my ( $self, $conditions, $convert_time_piece ) = @_;
+    my ( $self, $conditions ) = @_;
     my $arrayref = $self->get( "applogs.json", $conditions );
-    if ($convert_time_piece) {
+    if ($self->use_time_piece) {
         my $tmp_arrayref = [];
         foreach my $ref(@{$arrayref}) {
             $ref->{applog}->{time} = localtime($ref->{applog}->{time});
@@ -45,7 +45,7 @@ WWW::Giraffi::API::AppLog - Giraffi API AppLog Method Module
 
 =head1 VERSION
 
-0.13
+0.13_01
 
 =head1 SYNOPSIS
 
@@ -90,12 +90,12 @@ Return Array Reference:
      }
   ]
 
-unix timestamp will be changed into Time::Piece Object if 1 is passed to the 1st argument. 
+unix timestamp will be changed into Time::Piece Object.
 
 Example:
 
-  my $convert_time_piece = 1;
-  my $arrayref = $applog->all($convert_time_piece);
+  $applog->use_time_piece(1);
+  my $arrayref = $applog->all;
   # time is Time::Piece Object
   [
     {
@@ -144,12 +144,12 @@ Return Array Reference:
      }
   ]
 
-unix timestamp will be changed into Time::Piece Object if 1 is passed to the 2nd argument. 
+unix timestamp will be changed into Time::Piece Object.
 
 Example:
 
-  my $convert_time_piece = 1;
-  my $arrayref = $applog->search($conditions,$convert_time_piece);
+  $applog->use_time_piece(1);
+  my $arrayref = $applog->search($conditions);
 
 =head2 create
 

@@ -1,9 +1,13 @@
 use strict;
-use Test::More tests => 13;
-use Test::Fake::HTTPD;
 use WWW::Giraffi::API;
 use HTTP::Response;
 use JSON::Any;
+#use Test::More tests => 13;
+use Test::More;
+
+eval "use Test::Fake::HTTPD";
+plan skip_all => "Test::Fake::HTTPD required for testing http request/response" if $@;
+
 
 my $test_medium =  {
 			medium => {

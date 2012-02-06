@@ -9,6 +9,7 @@ use Class::XSAccessor
     apikey                  => "apikey",
     agent                   => "agent",
     ssl_verify_hostname     => "ssl_verify_hostname",
+    use_time_piece          => "use_time_piece",
     timeout                 => "timeout",
     default_endpoint        => "default_endpoint",
     applogs_endpoint        => "applogs_endpoint",
@@ -25,7 +26,7 @@ use HTTP::Request;
 use HTTP::Response;
 use URI;
 
-our $VERSION         = '0.13';
+our $VERSION         = '0.13_01';
 our %REQUEST_HEADERS = (
     "Accept"       => "application/json",
     "Content-Type" => "application/json"
@@ -207,7 +208,7 @@ WWW::Giraffi::API::Request - Giraffi API Access Request Base Module
 
 =head1 VERSION
 
-0.13
+0.13_01
 
 =head1 SYNOPSIS
 

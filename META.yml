@@ -28,5 +28,5 @@ requires:
   Time::Piece: 0
 resources:
   license: http://dev.perl.org/licenses/
-  repository: git://github.com/holly/perl-WWW-Giraffi-API.git
-version: 0.13
+  repository: '/home/kurt/repo/perl-WWW-Giraffi-API'
+version: 0.13_01

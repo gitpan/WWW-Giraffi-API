@@ -11,6 +11,7 @@ use Class::XSAccessor
     monitoringdata_endpoint => "monitoringdata_endpoint",
     verbose                 => "verbose",
     ssl_verify_hostname     => "ssl_verify_hostname",
+    use_time_piece          => "use_time_piece",
   },
   #true    => [qw(verbose)],
   replace => 1;
@@ -21,10 +22,11 @@ use Class::XSAccessor
 #has ssl_verify_hostname => ( is => "rw", isa => "Num");
 use Module::Pluggable search_path => [__PACKAGE__];
 
-our $VERSION                 = '0.13';
+our $VERSION                 = '0.13_01';
 our $AGENT                   = sprintf "%s/%s", __PACKAGE__, $VERSION;
 our $SSL_VERIFY_HOSTNAME     = 1;
 our $TIMEOUT                 = 30;
+our $USE_TIME_PIECE          = 1;
 our $DEFAULT_ENDPOINT        = "https://papi.giraffi.jp";
 our $MONITORINGDATA_ENDPOINT = "https://okapi.giraffi.jp:3007";
 our $APPLOGS_ENDPOINT        = "https://lapi.giraffi.jp:3443";
@@ -43,8 +45,8 @@ sub import {
             my %options = (
                 apikey                   => $self->apikey,
                 agent                    => $AGENT,
-                ssl_verify_hostname      => $self->ssl_verify_hostname
-                // $SSL_VERIFY_HOSTNAME,
+                ssl_verify_hostname      => $self->ssl_verify_hostname // $SSL_VERIFY_HOSTNAME,
+                use_time_piece           => $self->use_time_piece // $USE_TIME_PIECE,
                 timeout                  => $self->timeout // $TIMEOUT,
                 default_endpoint         => $self->default_endpoint // $DEFAULT_ENDPOINT,
                 monitoringdata_endpoint  => $self->monitoringdata_endpoint // $MONITORINGDATA_ENDPOINT,
@@ -81,7 +83,7 @@ WWW::Giraffi::API - Giraffi API Access Module
 
 =head1 VERSION
 
-0.13
+0.13_01
 
 =head1 SYNOPSIS
 
@@ -117,6 +119,10 @@ for LWP::UserAgent ssl_opts(verify_hostname => $this_value). 1
 
 for LWP::UserAgent timeout. 30
 
+=head2 $USE_TIME_PIECE
+
+convert unix timestamp fields in json response to Time::Piece Object. default 1
+
 =head2 $DEFAULT_ENDPOINT
 
 https://papi.giraffi.jp
@@ -145,6 +151,8 @@ https://lapi.giraffi.jp:3443"
 
 =head2 ssl_verify_hostname
 
+=head2 use_time_piece
+
 =head1 METHOD
 
 =head2 new
@@ -165,6 +173,7 @@ Options
   monitoringdata_endpoint   monitoringdata_endpoint. default $MONITORINGDATA_ENDPOINT
   verbose                   verbose output. default 0
   ssl_verify_hostname       ssl_verify_hostname(for LWP::UserAgent). default 1
+  use_time_piece            use_time_piece. default $USE_TIME_PIECE
 
 =head2 media
 

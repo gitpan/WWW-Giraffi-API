@@ -6,19 +6,19 @@ use Time::Piece;
 
 use parent qw(WWW::Giraffi::API::Request);
 
-our $VERSION = '0.13';
+our $VERSION = '0.13_01';
 
 sub all {
 
-    my ( $self, $convert_time_piece ) = @_;
-    return $self->search( undef, $convert_time_piece );
+    my ( $self ) = @_;
+    return $self->search;
 }
 
 sub search {
 
-    my ( $self, $conditions, $convert_time_piece ) = @_;
+    my ( $self, $conditions ) = @_;
     my $arrayref = $self->get( "logs/axion.json", $conditions );
-	if ($convert_time_piece) {
+	if ($self->use_time_piece) {
 		my $tmp_arrayref = [];
 		foreach my $ref(@{$arrayref}) {
 			$ref->{executed_at} = localtime($ref->{executed_at});
@@ -47,7 +47,7 @@ WWW::Giraffi::API::Log - Giraffi API Axion Log Method Module
 
 =head1 VERSION
 
-0.13
+0.13_01
 
 =head1 SYNOPSIS
 
@@ -116,12 +116,12 @@ Return Array Reference:
           }
   ]
 
-unix timestamp will be changed into Time::Piece Object if 1 is passed to the 1st argument. 
+unix timestamp will be changed into Time::Piece Object.
 
 Example:
 
-  my $convert_time_piece = 1;
-  my $arrayref = $log->all($convert_time_piece);
+  $log->use_time_piece(1);
+  my $arrayref = $log->all;
   # created_at/checked_at/executed_at is Time::Piece Object
   [
           {
@@ -227,13 +227,13 @@ Return Array Reference:
           }
   ]
 
-unix timestamp will be changed into Time::Piece Object if 1 is passed to the 2nd argument.
+unix timestamp will be changed into Time::Piece Object.
 convert field is same as all method result 
 
 Example:
 
-  my $convert_time_piece = 1;
-  my $arrayref = $log->search($conditions, $convert_time_piece);
+  $log->use_time_piece(1);
+  my $arrayref = $log->search($conditions);
 
 =head2 count
 

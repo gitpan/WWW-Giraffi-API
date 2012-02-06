@@ -6,13 +6,13 @@ use Time::Piece;
 
 use parent qw(WWW::Giraffi::API::Request);
 
-our $VERSION = '0.13';
+our $VERSION = '0.13_01';
 
 sub search_average {
 
-    my ( $self, $conditions, $convert_time_piece ) = @_;
+    my ( $self, $conditions ) = @_;
     my $arrayref = $self->get( "trends/average.json", $conditions );
-	if ($convert_time_piece) {
+	if ($self->use_time_piece) {
 		my $tmp_arrayref = [];
 		foreach my $ref(@{$arrayref}) {
 			$ref->{checked_at} = localtime($ref->{checked_at});
@@ -25,9 +25,9 @@ sub search_average {
 
 sub search_failure {
 
-    my ( $self, $conditions, $convert_time_piece ) = @_;
+    my ( $self, $conditions ) = @_;
     my $arrayref = $self->get( "trends/failure.json", $conditions );
-	if ($convert_time_piece) {
+	if ($self->use_time_piece) {
 		my $tmp_arrayref = [];
 		foreach my $ref(@{$arrayref}) {
 			$ref->{failed_start_at} = localtime($ref->{failed_start_at});
@@ -50,7 +50,7 @@ WWW::Giraffi::API::Trend - Giraffi API Axion Trend Method Module
 
 =head1 VERSION
 
-0.13
+0.13_01
 
 =head1 SYNOPSIS
 
@@ -123,12 +123,12 @@ Return Array Reference:
      }
   ]
 
-unix timestamp will be changed into Time::Piece Object if 1 is passed to the 2nd argument. 
+unix timestamp will be changed into Time::Piece Object
 
 Example:
 
-  my $convert_time_piece = 1;
-  my $arrayref = $trend->search_average($conditions, $convert_time_piece);
+  $trend->use_time_piece(1);
+  my $arrayref = $trend->search_average($conditions);
   # checked_at is Time::Piece Object
   [
      {
@@ -191,12 +191,12 @@ Return Array Reference:
     },
   ]
 
-unix timestamp(failed_start_at/failed_end_at key) will be changed into Time::Piece Object if 1 is passed to the 2nd argument. 
+unix timestamp(failed_start_at/failed_end_at key) will be changed into Time::Piece Object. 
 
 Example:
 
-  my $convert_time_piece = 1;
-  my $arrayref = $trend->search_failure($conditions, 1);
+  $trend->use_time_piece(1);
+  my $arrayref = $trend->search_failure($conditions);
 
 =head1 AUTHOR
 
