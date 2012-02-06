@@ -1,6 +1,8 @@
 Revision history for Perl extension WWW::Giraffi::API
 
-0.13_02    February  6, 2012 05:37:16 PM JST
+0.13_03    February  6, 2012 18:00:01 PM JST
+           - pod miss-spell update
+0.13_02    February  6, 2012 17:37:16 PM JST
            - pod miss-spell update/add user
 0.13_01    Mon Feb  6 15:46:54 JST 2012
            - Test::Fake::HTTPD none require change/unix timestamp will be changed into Time::Piece Object(default)

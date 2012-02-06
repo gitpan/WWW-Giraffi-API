@@ -24,4 +24,4 @@ requires:
   LWP::Protocol::https: 0
   Module::Pluggable: 0
   Time::Piece: 0
-version: 0.13_02
+version: 0.13_03

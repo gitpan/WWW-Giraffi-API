@@ -29,4 +29,4 @@ requires:
 resources:
   license: http://dev.perl.org/licenses/
   repository: '/home/kurt/repo/perl-WWW-Giraffi-API'
-version: 0.13_02
+version: 0.13_03

@@ -6,7 +6,7 @@ use Time::Piece;
 
 use parent qw(WWW::Giraffi::API::Request);
 
-our $VERSION = '0.13_02';
+our $VERSION = '0.13_03';
 
 sub all {
 
@@ -47,7 +47,7 @@ WWW::Giraffi::API::Log - Giraffi API Axion Log Method Module
 
 =head1 VERSION
 
-0.13_02
+0.13_03
 
 =head1 SYNOPSIS
 
