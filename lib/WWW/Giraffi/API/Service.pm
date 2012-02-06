@@ -5,7 +5,7 @@ use warnings;
 
 use parent qw(WWW::Giraffi::API::Request);
 
-our $VERSION = '0.13_01';
+our $VERSION = '0.13_02';
 
 sub all {
 
@@ -76,7 +76,7 @@ WWW::Giraffi::API::Service - Giraffi API Service Method Service Module
 
 =head1 VERSION
 
-0.13_01
+0.13_02
 
 =head1 SYNOPSIS
 

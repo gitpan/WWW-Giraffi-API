@@ -26,7 +26,7 @@ use HTTP::Request;
 use HTTP::Response;
 use URI;
 
-our $VERSION         = '0.13_01';
+our $VERSION         = '0.13_02';
 our %REQUEST_HEADERS = (
     "Accept"       => "application/json",
     "Content-Type" => "application/json"
@@ -78,12 +78,18 @@ sub delete {
 sub request {
 
     my ( $self, $method, $path_or_uri, $queryref, $contentref ) = @_;
+    my $req = $self->make_request( $method, $path_or_uri, $queryref, $contentref );
+	return $self->_request($req);
+}
+
+sub _request {
+
+	my($self, $req) = @_;
 
     my $ua = LWP::UserAgent->new( agent => $self->agent, timeout => $self->timeout );
     if ( !$self->ssl_verify_hostname ) {
         $ua->ssl_opts( verify_hostname => 0 );
     }
-    my $req = $self->make_request( $method, $path_or_uri, $queryref, $contentref );
     $self->_verbose( sprintf "request request_line %s => %s", $req->method, $req->uri );
 	if ($req->content) {
 	   $self->_verbose( sprintf "request content => %s", $req->content );
@@ -107,6 +113,9 @@ sub request {
 
     return $res;
 }
+
+
+
 
 sub make_request {
 
@@ -208,7 +217,7 @@ WWW::Giraffi::API::Request - Giraffi API Access Request Base Module
 
 =head1 VERSION
 
-0.13_01
+0.13_02
 
 =head1 SYNOPSIS
 
@@ -256,6 +265,8 @@ request headers hash
 =head2 agent
 
 =head2 ssl_verify_hostname
+
+=head2 use_time_piece
 
 =head2 timeout
 
