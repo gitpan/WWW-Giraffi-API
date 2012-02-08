@@ -5,66 +5,66 @@ use warnings;
 
 use parent qw(WWW::Giraffi::API::Request);
 
-our $VERSION = '0.13_03';
+our $VERSION = '0.13_04';
 
 sub all {
 
-    my ( $self ) = @_;
-    return $self->search;
+    my ( $self, $other_options ) = @_;
+    return $self->search(undef, $other_options);
 }
 
 sub search {
 
-    my ( $self, $conditions ) = @_;
-    return $self->get( "services.json", $conditions );
+    my ( $self, $conditions, $other_options ) = @_;
+    return $self->get( "services.json", $conditions, $other_options );
 }
 
 sub find {
 
-    my ( $self, $id ) = @_;
-    return $self->get( sprintf( "services/%s.json", $id ) );
+    my ( $self, $id, $other_options ) = @_;
+    return $self->get( sprintf( "services/%s.json", $id ), undef, $other_options );
 }
 
 sub find_region {
 
-    my ( $self, $id ) = @_;
-    return $self->get( sprintf( "services/%s/regions.json", $id ) );
+    my ( $self, $id, $other_options ) = @_;
+    return $self->get( sprintf( "services/%s/regions.json", $id ), undef, $other_options );
 }
 
 sub find_trigger {
 
-    my ( $self, $id ) = @_;
-    return $self->get( sprintf( "services/%s/triggers.json", $id ) );
+    my ( $self, $id, $other_options ) = @_;
+    return $self->get( sprintf( "services/%s/triggers.json", $id ), undef, $other_options );
 }
 
 sub update {
 
-    my ( $self, $id, $conditions ) = @_;
-    return $self->put( sprintf("services/%s.json", $id), undef, { service => $conditions } );
+    my ( $self, $id, $conditions, $other_options ) = @_;
+    return $self->put( sprintf("services/%s.json", $id), undef, { service => $conditions }, $other_options );
 }
 
 sub update_region {
 
-    my ( $self, $id, $region_code ) = @_;
-    return $self->put( sprintf("services/%s/regions/%s.json", $id, $region_code), undef, {} );
+    my ( $self, $id, $region_code, $other_options ) = @_;
+    return $self->put( sprintf("services/%s/regions/%s.json", $id, $region_code), undef, {}, $other_options );
 }
 
 sub destroy {
 
-    my ( $self, $id ) = @_;
-    return $self->delete( sprintf("services/%s.json", $id) );
+    my ( $self, $id, $other_options ) = @_;
+    return $self->delete( sprintf("services/%s.json", $id), undef, undef, $other_options );
 }
 
 sub add_trigger {
 
-    my ( $self, $id, $conditions ) = @_;
-    return $self->post( sprintf("services/%s/triggers.json", $id), undef, { trigger => $conditions } );
+    my ( $self, $id, $conditions, $other_options ) = @_;
+    return $self->post( sprintf("services/%s/triggers.json", $id), undef, { trigger => $conditions }, $other_options );
 }
 
 sub remove_trigger {
 
-    my ( $self, $id, $trigger_id ) = @_;
-    return $self->delete( sprintf("services/%s/triggers/%s.json", $id, $trigger_id) );
+    my ( $self, $id, $trigger_id, $other_options ) = @_;
+    return $self->delete( sprintf("services/%s/triggers/%s.json", $id, $trigger_id), undef, undef, $other_options );
 }
 1;
 
@@ -76,7 +76,7 @@ WWW::Giraffi::API::Service - Giraffi API Service Method Service Module
 
 =head1 VERSION
 
-0.13_03
+0.13_04
 
 =head1 SYNOPSIS
 

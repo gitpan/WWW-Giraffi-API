@@ -5,54 +5,54 @@ use warnings;
 
 use parent qw(WWW::Giraffi::API::Request);
 
-our $VERSION = '0.13_03';
+our $VERSION = '0.13_04';
 
 sub all {
 
-    my ( $self ) = @_;
-    return $self->search;
+    my ( $self, $other_options ) = @_;
+    return $self->search(undef, $other_options);
 }
 
 sub search {
 
-    my ( $self, $conditions ) = @_;
-    return $self->get( "media.json", $conditions );
+    my ( $self, $conditions, $other_options ) = @_;
+    return $self->get( "media.json", $conditions, $other_options );
 }
 
 sub find {
 
-    my ( $self, $id ) = @_;
-    return $self->get( sprintf( "media/%s.json", $id ) );
+    my ( $self, $id, $other_options ) = @_;
+    return $self->get( sprintf( "media/%s.json", $id ), undef, $other_options );
 }
 
 sub find_oauth {
 
-	my($self, $id) = @_;
-    return $self->get( sprintf( "media/%s/oauth.json", $id ) );
+	my($self, $id, $other_options) = @_;
+    return $self->get( sprintf( "media/%s/oauth.json", $id ), undef, $other_options );
 }
 
 sub find_oauth_callback {
 
-	my($self, $id, $oauth_verifier) = @_;
-    return $self->get( sprintf( "media/%s/oauth_callback.json", $id ), { oauth_verifier => $oauth_verifier} );
+	my($self, $id, $oauth_verifier, $other_options) = @_;
+    return $self->get( sprintf( "media/%s/oauth_callback.json", $id ), { oauth_verifier => $oauth_verifier}, $other_options );
 }
 
 sub create {
 
-    my ( $self, $conditions ) = @_;
-    return $self->post( "media.json", undef, { medium => $conditions } );
+    my ( $self, $conditions, $other_options ) = @_;
+    return $self->post( "media.json", undef, { medium => $conditions }, $other_options );
 }
 
 sub update {
 
-    my ( $self, $id, $conditions ) = @_;
-    return $self->put( sprintf("media/%s.json", $id), undef, { medium => $conditions } );
+    my ( $self, $id, $conditions, $other_options ) = @_;
+    return $self->put( sprintf("media/%s.json", $id), undef, { medium => $conditions }, $other_options );
 }
 
 sub destroy {
 
-    my ( $self, $id ) = @_;
-    return $self->delete( sprintf("media/%s.json", $id) );
+    my ( $self, $id, $other_options ) = @_;
+    return $self->delete( sprintf("media/%s.json", $id), undef, undef, $other_options );
 }
 
 1;
@@ -65,7 +65,7 @@ WWW::Giraffi::API::Media - Giraffi API Media Method Access Module
 
 =head1 VERSION
 
-0.13_03
+0.13_04
 
 =head1 SYNOPSIS
 

@@ -22,7 +22,7 @@ use Class::XSAccessor
 #has ssl_verify_hostname => ( is => "rw", isa => "Num");
 use Module::Pluggable search_path => [__PACKAGE__];
 
-our $VERSION                 = '0.13_03';
+our $VERSION                 = '0.13_04';
 our $AGENT                   = sprintf "%s/%s", __PACKAGE__, $VERSION;
 our $SSL_VERIFY_HOSTNAME     = 1;
 our $TIMEOUT                 = 30;
@@ -39,7 +39,8 @@ sub import {
         $pkg =~ /^${class}::([a-zA-Z]+)$/;
         my $method = lc $1;
 
-        no strict "refs";    ## no critic
+        no strict "refs";        ## no critic
+		no warnings "redefine";  ## no critic
         *{ __PACKAGE__ . "::$method" } = sub {
             my $self    = shift;
             my %options = (
@@ -83,7 +84,7 @@ WWW::Giraffi::API - Giraffi API Access Module
 
 =head1 VERSION
 
-0.13_03
+0.13_04
 
 =head1 SYNOPSIS
 

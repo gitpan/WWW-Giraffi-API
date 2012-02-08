@@ -5,73 +5,73 @@ use warnings;
 
 use parent qw(WWW::Giraffi::API::Request);
 
-our $VERSION = '0.13_03';
+our $VERSION = '0.13_04';
 
 sub all {
 
-    my ( $self ) = @_;
-    return $self->search;
+    my ( $self, $other_options ) = @_;
+    return $self->search(undef, $other_options);
 }
 
 sub search {
 
-    my ( $self, $conditions ) = @_;
-    return $self->get( "items.json", $conditions );
+    my ( $self, $conditions, $other_options ) = @_;
+    return $self->get( "items.json", $conditions, $other_options );
 }
 
 sub find {
 
-    my ( $self, $id ) = @_;
-    return $self->get( sprintf( "items/%s.json", $id ) );
+    my ( $self, $id, $other_options ) = @_;
+    return $self->get( sprintf( "items/%s.json", $id ), undef,  $other_options);
 }
 
 sub find_service {
 
-    my ( $self, $id, $conditions ) = @_;
-    return $self->get( sprintf( "items/%s/services.json", $id ), $conditions );
+    my ( $self, $id, $conditions, $other_options ) = @_;
+    return $self->get( sprintf( "items/%s/services.json", $id ), $conditions, $other_options );
 }
 
 sub find_agent {
 
-    my ( $self, $id ) = @_;
-    return $self->get( sprintf( "%s/items/%s/agent", $self->monitoringdata_endpoint, $id ) );
+    my ( $self, $id, $other_options ) = @_;
+    return $self->get( sprintf( "%s/items/%s/agent", $self->monitoringdata_endpoint, $id ), undef, $other_options );
 }
 
 sub create {
 
-    my ( $self, $conditions ) = @_;
-    return $self->post( "items.json", undef, { item => $conditions } );
+    my ( $self, $conditions, $other_options ) = @_;
+    return $self->post( "items.json", undef, { item => $conditions }, $other_options );
 }
 
 sub update {
 
-    my ( $self, $id, $conditions ) = @_;
-    return $self->put( sprintf("items/%s.json", $id), undef, { item => $conditions } );
+    my ( $self, $id, $conditions, $other_options ) = @_;
+    return $self->put( sprintf("items/%s.json", $id), undef, { item => $conditions }, $other_options );
 }
 
 
 sub destroy {
 
-    my ( $self, $id ) = @_;
-    return $self->delete( sprintf("items/%s.json", $id) );
+    my ( $self, $id , $other_options ) = @_;
+    return $self->delete( sprintf("items/%s.json", $id), undef, undef, $other_options );
 }
 
 sub reload {
 
-    my ( $self, $id ) = @_;
-    return $self->post("items/reload.json");
+    my ( $self, $id, $other_options ) = @_;
+    return $self->post("items/reload.json", undef, undef, $other_options);
 }
 
 sub add_service {
 
-    my ( $self, $id, $conditions ) = @_;
-    return $self->post(sprintf("items/%s/services.json", $id), undef, { service => $conditions });
+    my ( $self, $id, $conditions, $other_options ) = @_;
+    return $self->post(sprintf("items/%s/services.json", $id), undef, { service => $conditions }, $other_options);
 }
 
 sub remove_service {
 
-    my ( $self, $id, $service_id ) = @_;
-    return $self->delete(sprintf("items/%s/services/%s.json", $id, $service_id));
+    my ( $self, $id, $service_id, $other_options ) = @_;
+    return $self->delete(sprintf("items/%s/services/%s.json", $id, $service_id), undef, undef, $other_options);
 }
 
 
@@ -85,7 +85,7 @@ WWW::Giraffi::API::Item - Giraffi API Item Method Item Module
 
 =head1 VERSION
 
-0.13_03
+0.13_04
 
 =head1 SYNOPSIS
 

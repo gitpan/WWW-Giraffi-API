@@ -26,7 +26,7 @@ use HTTP::Request;
 use HTTP::Response;
 use URI;
 
-our $VERSION         = '0.13_03';
+our $VERSION         = '0.13_04';
 our %REQUEST_HEADERS = (
     "Accept"       => "application/json",
     "Content-Type" => "application/json"
@@ -45,40 +45,40 @@ our $CLIENT_TIMEOUT_CODE  = 408;
 
 sub get {
 
-    my ( $self, $path_or_uri, $queryref ) = @_;
-    my $res = $self->request( "GET", $path_or_uri, $queryref );
+    my ( $self, $path_or_uri, $queryref, $other_options ) = @_;
+    my $res = $self->request( "GET", $path_or_uri, $queryref, undef, $other_options );
 	#return $self->_json2ref( $res->content );
     return $self->_response2ref( $res );
 }
 
 sub post {
 
-    my ( $self, $path_or_uri, $queryref, $contentref ) = @_;
-    my $res = $self->request( "POST", $path_or_uri, $queryref, $contentref );
+    my ( $self, $path_or_uri, $queryref, $contentref, $other_options ) = @_;
+    my $res = $self->request( "POST", $path_or_uri, $queryref, $contentref, $other_options );
 	#return $self->_json2ref( $res->content );
     return $self->_response2ref( $res );
 }
 
 sub put {
 
-    my ( $self, $path_or_uri, $queryref, $contentref ) = @_;
-    my $res = $self->request( "PUT", $path_or_uri, $queryref, $contentref );
+    my ( $self, $path_or_uri, $queryref, $contentref, $other_options ) = @_;
+    my $res = $self->request( "PUT", $path_or_uri, $queryref, $contentref, $other_options );
 	#return $self->_json2ref( $res->content );
     return $self->_response2ref( $res );
 }
 
 sub delete {
 
-    my ( $self, $path_or_uri, $queryref, $contentref ) = @_;
-    my $res = $self->request( "DELETE", $path_or_uri, $queryref, $contentref );
+    my ( $self, $path_or_uri, $queryref, $contentref, $other_options ) = @_;
+    my $res = $self->request( "DELETE", $path_or_uri, $queryref, $contentref, $other_options );
 	#return $self->_json2ref( $res->content );
     return $self->_response2ref( $res );
 }
 
 sub request {
 
-    my ( $self, $method, $path_or_uri, $queryref, $contentref ) = @_;
-    my $req = $self->make_request( $method, $path_or_uri, $queryref, $contentref );
+    my ( $self, $method, $path_or_uri, $queryref, $contentref, $other_options ) = @_;
+    my $req = $self->make_request( $method, $path_or_uri, $queryref, $contentref, $other_options );
 	return $self->_request($req);
 }
 
@@ -119,8 +119,8 @@ sub _request {
 
 sub make_request {
 
-    my($self, $method, $path_or_uri, $queryref, $contentref) = @_;
-    my $req = HTTP::Request->new( $method => $self->_make_uri( $path_or_uri, $queryref ) );
+    my($self, $method, $path_or_uri, $queryref, $contentref, $other_options) = @_;
+    my $req = HTTP::Request->new( $method => $self->_make_uri( $path_or_uri, $queryref, $other_options ) );
     if ( $req->method =~ /^(POST|PUT|DELETE)$/ && ref($contentref) =~ /^(ARRAY|HASH)$/ ) {
         $req->header(%REQUEST_HEADERS);
         $req->content( $self->_ref2json($contentref) );
@@ -196,15 +196,22 @@ sub _verbose {
 
 sub _make_uri {
 
-    my ( $self, $path_or_uri, $queryref ) = @_;
+    my ( $self, $path_or_uri, $queryref, $other_options ) = @_;
 
     $queryref //= {};
     if ( $path_or_uri !~ /^https?:\/\// ) {
         $path_or_uri = sprintf "%s/%s", $self->default_endpoint, $path_or_uri;
     }
 
+	my $apikey;
+	if (ref($other_options) eq "HASH" && exists $other_options->{apikey}) {
+		$apikey = $other_options->{apikey};
+	} else {
+		$apikey = $self->apikey;
+	}
+
     my $uri = URI->new($path_or_uri);
-    $uri->query_form( [ apikey => $self->apikey, %{$queryref} ] );
+    $uri->query_form( [ apikey => $apikey, %{$queryref} ] );
     return $uri;
 }
 
@@ -217,7 +224,7 @@ WWW::Giraffi::API::Request - Giraffi API Access Request Base Module
 
 =head1 VERSION
 
-0.13_03
+0.13_04
 
 =head1 SYNOPSIS
 

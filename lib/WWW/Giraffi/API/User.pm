@@ -5,17 +5,17 @@ use warnings;
 
 use parent qw(WWW::Giraffi::API::Request);
 
-our $VERSION = '0.13_03';
+our $VERSION = '0.13_04';
 
 sub create {
 
     my ( $self, $vendor_apikey ) = @_;
 	### use low api ###
 	# make request and replace apikey
-	my $req = $self->make_request("POST", "users.json");
-	my %query_form = $req->uri->query_form;
-	$query_form{apikey} = $vendor_apikey;
-	$req->uri->query_form(%query_form);
+	my $req = $self->make_request("POST", "users.json", undef, undef, { apikey => $vendor_apikey });
+	#my %query_form = $req->uri->query_form;
+	#$query_form{apikey} = $vendor_apikey;
+	#$req->uri->query_form(%query_form);
 
 	# return HTTP::Response
 	my $res = $self->_request($req);
@@ -28,10 +28,10 @@ sub destroy {
 
 	### use low api ###
 	# make request and replace apikey
-	my $req = $self->make_request("DELETE", "users.json");
-	my %query_form = $req->uri->query_form;
-	$query_form{apikey} = $delete_apikey;
-	$req->uri->query_form(%query_form);
+	my $req = $self->make_request("DELETE", "users.json", undef, undef, { apikey => $delete_apikey });
+	#my %query_form = $req->uri->query_form;
+	#$query_form{apikey} = $delete_apikey;
+	#$req->uri->query_form(%query_form);
 
 	# return HTTP::Response
 	my $res = $self->_request($req);
@@ -48,7 +48,7 @@ WWW::Giraffi::API::User - Giraffi API User Method Access Module
 
 =head1 VERSION
 
-0.13_03
+0.13_04
 
 =head1 SYNOPSIS
 

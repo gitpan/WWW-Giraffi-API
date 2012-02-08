@@ -6,12 +6,12 @@ use Time::Piece;
 
 use parent qw(WWW::Giraffi::API::Request);
 
-our $VERSION = '0.13_03';
+our $VERSION = '0.13_04';
 
 sub search_average {
 
-    my ( $self, $conditions ) = @_;
-    my $arrayref = $self->get( "trends/average.json", $conditions );
+    my ( $self, $conditions, $other_options ) = @_;
+    my $arrayref = $self->get( "trends/average.json", $conditions, $other_options );
 	if ($self->use_time_piece) {
 		my $tmp_arrayref = [];
 		foreach my $ref(@{$arrayref}) {
@@ -25,8 +25,8 @@ sub search_average {
 
 sub search_failure {
 
-    my ( $self, $conditions ) = @_;
-    my $arrayref = $self->get( "trends/failure.json", $conditions );
+    my ( $self, $conditions, $other_options ) = @_;
+    my $arrayref = $self->get( "trends/failure.json", $conditions, $other_options );
 	if ($self->use_time_piece) {
 		my $tmp_arrayref = [];
 		foreach my $ref(@{$arrayref}) {
@@ -50,7 +50,7 @@ WWW::Giraffi::API::Trend - Giraffi API Axion Trend Method Module
 
 =head1 VERSION
 
-0.13_03
+0.13_04
 
 =head1 SYNOPSIS
 

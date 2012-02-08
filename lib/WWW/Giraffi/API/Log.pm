@@ -6,18 +6,18 @@ use Time::Piece;
 
 use parent qw(WWW::Giraffi::API::Request);
 
-our $VERSION = '0.13_03';
+our $VERSION = '0.13_04';
 
 sub all {
 
-    my ( $self ) = @_;
-    return $self->search;
+    my ( $self, $other_options ) = @_;
+    return $self->search(undef, $other_options);
 }
 
 sub search {
 
-    my ( $self, $conditions ) = @_;
-    my $arrayref = $self->get( "logs/axion.json", $conditions );
+    my ( $self, $conditions, $other_options ) = @_;
+    my $arrayref = $self->get( "logs/axion.json", $conditions, $other_options );
 	if ($self->use_time_piece) {
 		my $tmp_arrayref = [];
 		foreach my $ref(@{$arrayref}) {
@@ -33,8 +33,8 @@ sub search {
 
 sub count {
 
-    my ( $self, $conditions ) = @_;
-    return $self->get( "logs/axion/count.json", $conditions );
+    my ( $self, $conditions, $other_options ) = @_;
+    return $self->get( "logs/axion/count.json", $conditions, $other_options );
 }
 
 1;
@@ -47,7 +47,7 @@ WWW::Giraffi::API::Log - Giraffi API Axion Log Method Module
 
 =head1 VERSION
 
-0.13_03
+0.13_04
 
 =head1 SYNOPSIS
 

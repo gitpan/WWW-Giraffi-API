@@ -6,18 +6,18 @@ use Time::Piece;
 
 use parent qw(WWW::Giraffi::API::Request);
 
-our $VERSION = '0.13_03';
+our $VERSION = '0.13_04';
 
 sub all {
 
-    my ( $self ) = @_;
-	return $self->search;
+    my ( $self, $other_options ) = @_;
+	return $self->search(undef, $other_option);
 }
 
 sub search {
 	# no test
-    my ( $self, $conditions ) = @_;
-    my $arrayref = $self->get( "applogs.json", $conditions );
+    my ( $self, $conditions, $other_options ) = @_;
+    my $arrayref = $self->get( "applogs.json", $conditions, $other_options );
     if ($self->use_time_piece) {
         my $tmp_arrayref = [];
         foreach my $ref(@{$arrayref}) {
@@ -31,8 +31,8 @@ sub search {
 
 sub create {
 
-    my ( $self, $conditions ) = @_;
-    return $self->post( sprintf("%s/applogs.json", $self->applogs_endpoint), undef, { applog => $conditions } );
+    my ( $self, $conditions, $other_options ) = @_;
+    return $self->post( sprintf("%s/applogs.json", $self->applogs_endpoint), undef, { applog => $conditions }, $other_options );
 }
 
 1;
@@ -45,7 +45,7 @@ WWW::Giraffi::API::AppLog - Giraffi API AppLog Method Module
 
 =head1 VERSION
 
-0.13_03
+0.13_04
 
 =head1 SYNOPSIS
 

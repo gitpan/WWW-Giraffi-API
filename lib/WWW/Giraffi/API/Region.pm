@@ -5,12 +5,12 @@ use warnings;
 
 use parent qw(WWW::Giraffi::API::Request);
 
-our $VERSION = '0.13_03';
+our $VERSION = '0.13_04';
 
 sub all {
 
-    my ( $self ) = @_;
-    return $self->get( "regions.json" );
+    my ( $self, $other_options ) = @_;
+    return $self->get( "regions.json", undef, $other_options );
 }
 
 #sub search {
@@ -35,7 +35,7 @@ WWW::Giraffi::API::Region - Giraffi API Region Method Region Module
 
 =head1 VERSION
 
-0.13_03
+0.13_04
 
 =head1 SYNOPSIS
 

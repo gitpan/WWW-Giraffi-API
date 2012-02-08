@@ -6,13 +6,13 @@ use Time::Piece;
 
 use parent qw(WWW::Giraffi::API::Request);
 
-our $VERSION = '0.13_03';
+our $VERSION = '0.13_04';
 
 
 sub search {
 	# no test
-    my ( $self, $conditions ) = @_;
-    my $arrayref = $self->get( "monitoringdata.json", $conditions );
+    my ( $self, $conditions, $other_options ) = @_;
+    my $arrayref = $self->get( "monitoringdata.json", $conditions, $other_options );
 	if ($self->use_time_piece) {
 		my $tmp_arrayref = [];
 		foreach my $ref(@{$arrayref}) {
@@ -27,8 +27,8 @@ sub search {
 
 sub create {
 	# no test
-    my ( $self, $conditions ) = @_;
-    return $self->post( sprintf("%s/internal/nodelayed", $self->monitoringdata_endpoint), undef, { internal => $conditions } );
+    my ( $self, $conditions, $other_options ) = @_;
+    return $self->post( sprintf("%s/internal/nodelayed", $self->monitoringdata_endpoint), undef, { internal => $conditions }, $other_options );
 }
 
 1;
@@ -41,7 +41,7 @@ WWW::Giraffi::API::MonitoringData - Giraffi API MonitoringData Method Module
 
 =head1 VERSION
 
-0.13_03
+0.13_04
 
 =head1 SYNOPSIS
 

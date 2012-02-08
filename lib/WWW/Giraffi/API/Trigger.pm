@@ -5,61 +5,61 @@ use warnings;
 
 use parent qw(WWW::Giraffi::API::Request);
 
-our $VERSION = '0.13_03';
+our $VERSION = '0.13_04';
 
 sub all {
 
-    my ( $self ) = @_;
-    return $self->search;
+    my ( $self, $other_options ) = @_;
+    return $self->search(undef, $other_options);
 }
 
 sub search {
 
-    my ( $self, $conditions ) = @_;
-    return $self->get( "triggers.json", $conditions );
+    my ( $self, $conditions, $other_options ) = @_;
+    return $self->get( "triggers.json", $conditions, $other_options );
 }
 
 sub find {
 
-    my ( $self, $id ) = @_;
-    return $self->get( sprintf( "triggers/%s.json", $id ) );
+    my ( $self, $id, $other_options ) = @_;
+    return $self->get( sprintf( "triggers/%s.json", $id ), undef, $other_options );
 }
 
 sub find_axion {
 
-    my ( $self, $id ) = @_;
-    return $self->get( sprintf( "triggers/%s/axions.json", $id ) );
+    my ( $self, $id, $other_options ) = @_;
+    return $self->get( sprintf( "triggers/%s/axions.json", $id ), undef, $other_options );
 }
 
 sub exec_axion {
 
-    my ( $self, $id ) = @_;
-    return $self->post( sprintf( "triggers/%s/axions/execute.json", $id ) );
+    my ( $self, $id, $other_options ) = @_;
+    return $self->post( sprintf( "triggers/%s/axions/execute.json", $id ), undef, undef, $other_options );
 }
 
 sub update {
 
-    my ( $self, $id, $conditions ) = @_;
-    return $self->put( sprintf("triggers/%s.json", $id), undef, { trigger => $conditions } );
+    my ( $self, $id, $conditions, $other_options ) = @_;
+    return $self->put( sprintf("triggers/%s.json", $id), undef, { trigger => $conditions }, $other_options );
 }
 
 sub update_axion {
 
 	# $axion_kind is problem or recovery
-    my ( $self, $id, $axion_id, $axion_kind ) = @_;
-    return $self->put( sprintf("triggers/%s/axions/%s.json", $id, $axion_id), undef, { axionkind => $axion_kind } );
+    my ( $self, $id, $axion_id, $axion_kind, $other_options ) = @_;
+    return $self->put( sprintf("triggers/%s/axions/%s.json", $id, $axion_id), undef, { axionkind => $axion_kind }, $other_options );
 }
 
 sub destroy {
 
-    my ( $self, $id ) = @_;
-    return $self->delete( sprintf("triggers/%s.json", $id) );
+    my ( $self, $id, $other_options ) = @_;
+    return $self->delete( sprintf("triggers/%s.json", $id), undef, undef, $other_options );
 }
 
 sub remove_axion {
 
-    my ( $self, $id, $axion_id, $axion_kind ) = @_;
-    return $self->delete( sprintf("triggers/%s/axions/%s.json", $id, $axion_id ), undef, { axionkind => $axion_kind } );
+    my ( $self, $id, $axion_id, $axion_kind, $other_options ) = @_;
+    return $self->delete( sprintf("triggers/%s/axions/%s.json", $id, $axion_id ), undef, { axionkind => $axion_kind }, $other_options );
 }
 
 1;
@@ -72,7 +72,7 @@ WWW::Giraffi::API::Trigger - Giraffi API Trigger Method Trigger Module
 
 =head1 VERSION
 
-0.13_03
+0.13_04
 
 =head1 SYNOPSIS
 
