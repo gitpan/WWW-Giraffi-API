@@ -1,5 +1,7 @@
 Revision history for Perl extension WWW::Giraffi::API
 
+0.13_05    Thu Feb 16 12:43:31 JST 2012
+           - WWW::Giraffi::API::Item#reload args miss update
 0.13_04    February  7, 2012 14:30:01 PM JST
            - change apikey whenever execute api method(experimental)
 0.13_03    February  6, 2012 18:00:01 PM JST

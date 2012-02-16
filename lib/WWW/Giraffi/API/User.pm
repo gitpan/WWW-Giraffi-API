@@ -5,7 +5,7 @@ use warnings;
 
 use parent qw(WWW::Giraffi::API::Request);
 
-our $VERSION = '0.13_04';
+our $VERSION = '0.13_05';
 
 sub create {
 
@@ -48,7 +48,7 @@ WWW::Giraffi::API::User - Giraffi API User Method Access Module
 
 =head1 VERSION
 
-0.13_04
+0.13_05
 
 =head1 SYNOPSIS
 

@@ -26,7 +26,7 @@ use HTTP::Request;
 use HTTP::Response;
 use URI;
 
-our $VERSION         = '0.13_04';
+our $VERSION         = '0.13_05';
 our %REQUEST_HEADERS = (
     "Accept"       => "application/json",
     "Content-Type" => "application/json"
@@ -224,7 +224,7 @@ WWW::Giraffi::API::Request - Giraffi API Access Request Base Module
 
 =head1 VERSION
 
-0.13_04
+0.13_05
 
 =head1 SYNOPSIS
 

@@ -5,7 +5,7 @@ use warnings;
 
 use parent qw(WWW::Giraffi::API::Request);
 
-our $VERSION = '0.13_04';
+our $VERSION = '0.13_05';
 
 sub all {
 
@@ -58,7 +58,7 @@ sub destroy {
 
 sub reload {
 
-    my ( $self, $id, $other_options ) = @_;
+    my ( $self, $other_options ) = @_;
     return $self->post("items/reload.json", undef, undef, $other_options);
 }
 
@@ -85,7 +85,7 @@ WWW::Giraffi::API::Item - Giraffi API Item Method Item Module
 
 =head1 VERSION
 
-0.13_04
+0.13_05
 
 =head1 SYNOPSIS
 
@@ -266,6 +266,14 @@ Example:
 
   my $item_id = 1;
   $item->delete($item_id);
+
+=head2 reload
+
+Item/Service/Trigger all setting reload
+
+Example:
+
+  $item->reload;
 
 =head2 add_service
 
