@@ -87,7 +87,7 @@ is($search_arrayref->[0]->{medium}->{id}, 1, "search return id test");
 
 my $find_ref = $g->media->find($media_id);
 is(ref($find_ref), "HASH", "find return reftype test");
-cmp_ok(keys($find_ref), "==", 1, "find return num test");
+is(keys(%{$find_ref}), 1, "find return num test");
 is($find_ref->{medium}->{id}, 1, "find return id test");
 
 
