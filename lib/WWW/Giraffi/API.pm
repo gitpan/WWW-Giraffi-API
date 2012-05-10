@@ -23,7 +23,7 @@ use Class::XSAccessor
 #has ssl_verify_hostname => ( is => "rw", isa => "Num");
 use Module::Pluggable search_path => [__PACKAGE__];
 
-our $VERSION                 = '0.2_01';
+our $VERSION                 = '0.2_02';
 our $AGENT                   = sprintf "%s/%s", __PACKAGE__, $VERSION;
 our $SSL_VERIFY_HOSTNAME     = 1;
 our $TIMEOUT                 = 30;
@@ -85,7 +85,7 @@ WWW::Giraffi::API - Giraffi API Access Module
 
 =head1 VERSION
 
-0.2_01
+0.2_02
 
 =head1 SYNOPSIS
 

@@ -6,7 +6,7 @@ use Time::Piece;
 
 use parent qw(WWW::Giraffi::API::Request);
 
-our $VERSION = '0.2_01';
+our $VERSION = '0.2_02';
 
 # this method has not been tested
 sub all {
@@ -48,7 +48,7 @@ WWW::Giraffi::API::AppLog - Giraffi API AppLog Method Module
 
 =head1 VERSION
 
-0.2_01
+0.2_02
 
 =head1 SYNOPSIS
 

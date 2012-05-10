@@ -1,6 +1,8 @@
 Revision history for Perl extension WWW::Giraffi::API
 
-0.14_01    Thu May 10 16:10:17 JST 2012
+0.2_02     Thu May 10 16:17:41 JST 2012
+           - Change typo
+0.2_01     Thu May 10 16:10:17 JST 2012
            - testcase update
 0.13_05    Thu Feb 16 12:43:31 JST 2012
            - WWW::Giraffi::API::Item#reload args miss update
