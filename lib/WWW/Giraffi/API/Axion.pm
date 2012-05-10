@@ -5,7 +5,7 @@ use warnings;
 
 use parent qw(WWW::Giraffi::API::Request);
 
-our $VERSION = '0.13_05';
+our $VERSION = '0.2_01';
 
 sub all {
 
@@ -78,7 +78,7 @@ WWW::Giraffi::API::Axion - Giraffi API Axion Method Axion Module
 
 =head1 VERSION
 
-0.13_05
+0.2_01
 
 =head1 SYNOPSIS
 

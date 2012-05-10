@@ -5,7 +5,7 @@ use warnings;
 
 use parent qw(WWW::Giraffi::API::Request);
 
-our $VERSION = '0.13_05';
+our $VERSION = '0.2_01';
 
 sub all {
 
@@ -25,16 +25,19 @@ sub find {
     return $self->get( sprintf( "media/%s.json", $id ), undef, $other_options );
 }
 
+
+# this method has not been tested
 sub find_oauth {
 
 	my($self, $id, $other_options) = @_;
-    return $self->get( sprintf( "media/%s/oauth.json", $id ), undef, $other_options );
+	return $self->get( sprintf( "media/%s/oauth.json", $id ), undef, $other_options );
 }
 
+# this method has not been tested
 sub find_oauth_callback {
 
 	my($self, $id, $oauth_verifier, $other_options) = @_;
-    return $self->get( sprintf( "media/%s/oauth_callback.json", $id ), { oauth_verifier => $oauth_verifier}, $other_options );
+	return $self->get( sprintf( "media/%s/oauth_callback.json", $id ), { oauth_verifier => $oauth_verifier}, $other_options );
 }
 
 sub create {
@@ -65,7 +68,7 @@ WWW::Giraffi::API::Media - Giraffi API Media Method Access Module
 
 =head1 VERSION
 
-0.13_05
+0.2_01
 
 =head1 SYNOPSIS
 

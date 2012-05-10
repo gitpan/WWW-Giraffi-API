@@ -1,17 +1,21 @@
 use strict;
 use WWW::Giraffi::API::Request;
-use HTTP::Response;
 use JSON::Any;
-#use Test::More tests => 20;
 use Test::More;
 
-eval "use Test::Fake::HTTPD";
-plan skip_all => "Test::Fake::HTTPD required for testing http request/response" if $@;
+eval "use Test::Fake::HTTPD;";
+if($@) {
+	plan skip_all => "Test::Fake::HTTPD required for testing http request/response";
+} else {
+	plan tests => 20;
+}
 
 my $ref = {message => "dummy"};
-my $httpd = run_http_server {
+
+my $httpd = Test::Fake::HTTPD->new->run(sub {
 				my $req = shift;
-				return HTTP::Response->new( 200, "ok", [ "Content-Type" => "application/json" ], JSON::Any->new->encode($ref) )};
+				return [ 200, [ "Content-Type" => "application/json" ], [ JSON::Any->new->encode($ref) ] ];
+			});
 
 my $apikey = "ilovenirvana_ilovemelvins";
 my $args = [

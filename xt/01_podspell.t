@@ -6,8 +6,8 @@ $ENV{LANG} = 'C';
 all_pod_files_spelling_ok('lib');
 __DATA__
 holly
-emperor@gmail.com
 WWW::Giraffi::API
+DateTime
 Akira
 Horimoto
 axion
@@ -24,3 +24,5 @@ unix
 todo
 json
 id
+applog
+monitoringdata

@@ -2,11 +2,14 @@ use strict;
 use WWW::Giraffi::API;
 use HTTP::Response;
 use JSON::Any;
-#use Test::More tests => 13;
 use Test::More;
 
 eval "use Test::Fake::HTTPD";
-plan skip_all => "Test::Fake::HTTPD required for testing http request/response" if $@;
+if($@) {
+	plan skip_all => "Test::Fake::HTTPD required for testing http request/response";
+} else {
+	plan tests => 15;
+}
 
 
 my $test_medium =  {
@@ -19,9 +22,8 @@ my $test_medium =  {
 			}
 		};
 
-my $a = 1;
+my $httpd = Test::Fake::HTTPD->new->run(sub {
 
-my $httpd = run_http_server {
 				my $req = shift;
 				my $ref =$req->content ? JSON::Any->new->decode($req->content) : undef;
 
@@ -43,26 +45,21 @@ my $httpd = run_http_server {
 						# all
 						$response_ref = [ $test_medium ];
 					}
-
 				} elsif ($req->method eq "POST") {
 
 					$ref->{medium}->{id} = 2;
 					$response_ref = $ref;
-
 				} elsif ($req->method eq "PUT") {
 
 					$test_medium->{medium}->{name} = $ref->{medium}->{name};
-
 				} elsif ($req->method eq "DELETE") {
 					$req->uri->path =~ /\/(\d+)\.json$/;
 					my $media_id = $1;
 					delete $test_medium->{medium} if exists $test_medium->{medium}->{$media_id};
 				}
 
-				return HTTP::Response->new( 200, "ok", [ "Content-Type" => "application/json" ], JSON::Any->new->encode($response_ref) )};
-
-my $apikey = "ilovenirvana_ilovemelvins";
-$WWW::Giraffi::API::DEFAULT_ENDPOINT = $httpd->endpoint;
+				return [ 200, [ "Content-Type" => "application/json" ], [ JSON::Any->new->encode($response_ref) ] ];
+		});
 
 my $media_id = 1;
 my $conditions = { name => "Alert Email" };
@@ -72,7 +69,11 @@ my $medium = {
 		name => 'Alert Email',
 	};
 
-my $g = WWW::Giraffi::API->new(apikey => $apikey);
+my $apikey = "ilovenirvana_ilovemelvins";
+my $g = WWW::Giraffi::API->new(
+						apikey => $apikey,
+						default_endpoint => $httpd->endpoint
+					);
 
 my $all_arrayref = $g->media->all;
 is(ref($all_arrayref), "ARRAY", "all return reftype test");
@@ -96,9 +97,8 @@ is($create_ref->{medium}->{id}, 2, "create return id test");
 
 my $update_ref = $g->media->update($media_id, $medium);
 is(ref($update_ref), "HASH", "update return reftype test");
-#is($test_medium->{medium}->{name}, $medium->{name}, "media update name value test");
+is($test_medium->{medium}->{name}, $medium->{name}, "media update name value test");
 
 my $destroy_ref = $g->media->destroy($media_id);
 is(ref($destroy_ref), "HASH", "destroy return reftype test");
-#ok(!defined $test_medium, "media destory test");
-
+is(keys(%{$destroy_ref}), 0, "media destory test");

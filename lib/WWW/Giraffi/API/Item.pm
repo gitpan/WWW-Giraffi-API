@@ -5,7 +5,7 @@ use warnings;
 
 use parent qw(WWW::Giraffi::API::Request);
 
-our $VERSION = '0.13_05';
+our $VERSION = '0.2_01';
 
 sub all {
 
@@ -31,6 +31,7 @@ sub find_service {
     return $self->get( sprintf( "items/%s/services.json", $id ), $conditions, $other_options );
 }
 
+# this method has not been tested
 sub find_agent {
 
     my ( $self, $id, $other_options ) = @_;
@@ -85,7 +86,7 @@ WWW::Giraffi::API::Item - Giraffi API Item Method Item Module
 
 =head1 VERSION
 
-0.13_05
+0.2_01
 
 =head1 SYNOPSIS
 

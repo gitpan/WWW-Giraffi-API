@@ -7,20 +7,30 @@ my $g = new_ok("WWW::Giraffi::API");
 
 my $media = $g->media;
 isa_ok($media, "WWW::Giraffi::API::Media");
-is($media, $g->media);
 
 my $axion = $g->axion;
 isa_ok($axion, "WWW::Giraffi::API::Axion");
-is($axion, $g->axion);
 
 my $item = $g->item;
 isa_ok($item, "WWW::Giraffi::API::Item");
-is($item, $g->item);
 
 my $service = $g->service;
 isa_ok($service, "WWW::Giraffi::API::Service");
-is($service, $g->service);
 
 my $trigger = $g->trigger;
 isa_ok($trigger, "WWW::Giraffi::API::Trigger");
-is($trigger, $g->trigger);
+
+my $log = $g->log;
+isa_ok($log, "WWW::Giraffi::API::Log");
+
+my $applog = $g->applog;
+isa_ok($applog, "WWW::Giraffi::API::AppLog");
+
+my $trend = $g->trend;
+isa_ok($trend, "WWW::Giraffi::API::Trend");
+
+my $region = $g->region;
+isa_ok($region, "WWW::Giraffi::API::Region");
+
+my $monitoringdata = $g->monitoringdata;
+isa_ok($monitoringdata, "WWW::Giraffi::API::MonitoringData");

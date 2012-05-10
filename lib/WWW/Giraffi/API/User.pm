@@ -5,7 +5,7 @@ use warnings;
 
 use parent qw(WWW::Giraffi::API::Request);
 
-our $VERSION = '0.13_05';
+our $VERSION = '0.2_01';
 
 sub create {
 
@@ -18,6 +18,14 @@ sub create {
 	#$req->uri->query_form(%query_form);
 
 	# return HTTP::Response
+	my $res = $self->_request($req);
+    return $self->_response2ref( $res );
+}
+
+sub update {
+
+    my ( $self, $update_apikey ) = @_;
+	my $req = $self->make_request("PUT", "users/apikey", undef, undef, { apikey => $update_apikey });
 	my $res = $self->_request($req);
     return $self->_response2ref( $res );
 }
@@ -48,7 +56,7 @@ WWW::Giraffi::API::User - Giraffi API User Method Access Module
 
 =head1 VERSION
 
-0.13_05
+0.2_01
 
 =head1 SYNOPSIS
 
@@ -90,6 +98,17 @@ Return Reference:
                   'apikey' => 'new_user_apikey'
                 }
     };
+
+=head2 update
+
+Update user apikey
+
+Example:
+
+  my $update_apikey = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxx";
+  $ create user object
+  my $user = $g->user;
+  $user->update($delete_apikey);
 
 =head2 destroy
 

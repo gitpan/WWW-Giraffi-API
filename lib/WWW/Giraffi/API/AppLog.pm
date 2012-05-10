@@ -6,14 +6,16 @@ use Time::Piece;
 
 use parent qw(WWW::Giraffi::API::Request);
 
-our $VERSION = '0.13_05';
+our $VERSION = '0.2_01';
 
+# this method has not been tested
 sub all {
 
     my ( $self, $other_options ) = @_;
-	return $self->search(undef, $other_option);
+	return $self->search(undef, $other_options);
 }
 
+# this method has not been tested
 sub search {
 	# no test
     my ( $self, $conditions, $other_options ) = @_;
@@ -29,6 +31,7 @@ sub search {
 	return $arrayref;
 }
 
+# this method has not been tested
 sub create {
 
     my ( $self, $conditions, $other_options ) = @_;
@@ -45,7 +48,7 @@ WWW::Giraffi::API::AppLog - Giraffi API AppLog Method Module
 
 =head1 VERSION
 
-0.13_05
+0.2_01
 
 =head1 SYNOPSIS
 

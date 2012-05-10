@@ -22,7 +22,7 @@
    "prereqs" : {
       "build" : {
          "requires" : {
-            "ExtUtils::MakeMaker" : "6.36"
+            "ExtUtils::MakeMaker" : "6.62"
          }
       },
       "configure" : {
@@ -32,15 +32,16 @@
       },
       "runtime" : {
          "requires" : {
-            "Class::XSAccessor" : 0,
-            "Crypt::SSLeay" : 0,
-            "JSON::Any" : 0,
-            "LWP::Protocol::https" : 0,
-            "Module::Pluggable" : 0,
-            "Time::Piece" : 0
+            "Class::XSAccessor" : "1.13",
+            "Crypt::SSLeay" : "0.58",
+            "JSON::Any" : "1.29",
+            "LWP::Protocol::https" : "6.03",
+            "Module::Pluggable" : "4.0",
+            "Time::Piece" : "1.20_01",
+            "perl" : "5.010"
          }
       }
    },
    "release_status" : "testing",
-   "version" : "0.13_05"
+   "version" : "0.2_01"
 }
