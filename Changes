@@ -1,5 +1,7 @@
 Revision history for Perl extension WWW::Giraffi::API
 
+0.2_04     Thu May 11 09:04:32 JST 2012
+           - update WWW::Giraffi::API::MonitoringData pod
 0.2_03     Thu May 10 17:08:18 JST 2012
            - update media test
 0.2_02     Thu May 10 16:17:41 JST 2012

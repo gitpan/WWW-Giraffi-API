@@ -26,7 +26,7 @@ use HTTP::Request;
 use HTTP::Response;
 use URI;
 
-our $VERSION         = '0.2_03';
+our $VERSION         = '0.2_04';
 our %REQUEST_HEADERS = (
     "Accept"       => "application/json",
     "Content-Type" => "application/json"
@@ -45,26 +45,26 @@ our $CLIENT_TIMEOUT_CODE  = 408;
 
 sub get {
 
-    my ( $self, $path_or_uri, $queryref, $other_options ) = @_;
-    my $res = $self->request( "GET", $path_or_uri, $queryref, undef, $other_options );
+	my ( $self, $path_or_uri, $queryref, $other_options ) = @_;
+	my $res = $self->request( "GET", $path_or_uri, $queryref, undef, $other_options );
 	#return $self->_json2ref( $res->content );
-    return $self->_response2ref( $res );
+	return $self->_response2ref( $res );
 }
 
 sub post {
 
-    my ( $self, $path_or_uri, $queryref, $contentref, $other_options ) = @_;
-    my $res = $self->request( "POST", $path_or_uri, $queryref, $contentref, $other_options );
+	my ( $self, $path_or_uri, $queryref, $contentref, $other_options ) = @_;
+	my $res = $self->request( "POST", $path_or_uri, $queryref, $contentref, $other_options );
 	#return $self->_json2ref( $res->content );
-    return $self->_response2ref( $res );
+	return $self->_response2ref( $res );
 }
 
 sub put {
 
-    my ( $self, $path_or_uri, $queryref, $contentref, $other_options ) = @_;
-    my $res = $self->request( "PUT", $path_or_uri, $queryref, $contentref, $other_options );
+	my ( $self, $path_or_uri, $queryref, $contentref, $other_options ) = @_;
+	my $res = $self->request( "PUT", $path_or_uri, $queryref, $contentref, $other_options );
 	#return $self->_json2ref( $res->content );
-    return $self->_response2ref( $res );
+	return $self->_response2ref( $res );
 }
 
 sub delete {
@@ -77,8 +77,8 @@ sub delete {
 
 sub request {
 
-    my ( $self, $method, $path_or_uri, $queryref, $contentref, $other_options ) = @_;
-    my $req = $self->make_request( $method, $path_or_uri, $queryref, $contentref, $other_options );
+	my ( $self, $method, $path_or_uri, $queryref, $contentref, $other_options ) = @_;
+	my $req = $self->make_request( $method, $path_or_uri, $queryref, $contentref, $other_options );
 	return $self->_request($req);
 }
 
@@ -86,36 +86,33 @@ sub _request {
 
 	my($self, $req) = @_;
 
-    my $ua = LWP::UserAgent->new( agent => $self->agent, timeout => $self->timeout );
-    if ( !$self->ssl_verify_hostname ) {
-        $ua->ssl_opts( verify_hostname => 0 );
-    }
-    $self->_verbose( sprintf "request request_line %s => %s", $req->method, $req->uri );
+	my $ua = LWP::UserAgent->new( agent => $self->agent, timeout => $self->timeout );
+	if ( !$self->ssl_verify_hostname ) {
+		$ua->ssl_opts( verify_hostname => 0 );
+	}
+	$self->_verbose( sprintf "request request_line %s => %s", $req->method, $req->uri );
 	if ($req->content) {
 	   $self->_verbose( sprintf "request content => %s", $req->content );
 	}
 
-    my $res;
-    my $is_client_timeout;
-    eval {
-        local $SIG{ALRM} = sub { $is_client_timeout = 1 };
-        alarm $self->timeout + $CLIENT_TIMEOUT_DELAY;
+	my $res;
+	my $is_client_timeout;
+	eval {
+		local $SIG{ALRM} = sub { $is_client_timeout = 1 };
+		alarm $self->timeout + $CLIENT_TIMEOUT_DELAY;
 		$self->last_request($req);
-        $res = $ua->request($req);
-        alarm 0;
-    };
-    if ($is_client_timeout) {
-        $res = $self->make_response( $CLIENT_TIMEOUT_CODE, { error => "alarm timeout" } );
-    }
+		$res = $ua->request($req);
+		alarm 0;
+	};
+	if ($is_client_timeout) {
+		$res = $self->make_response( $CLIENT_TIMEOUT_CODE, { error => "alarm timeout" } );
+	}
 	$self->last_response($res);
 
-    $self->_verbose( sprintf "response status_line => %s", $res->status_line );
+	$self->_verbose( sprintf "response status_line => %s", $res->status_line );
 
-    return $res;
+	return $res;
 }
-
-
-
 
 sub make_request {
 
@@ -130,10 +127,9 @@ sub make_request {
 
 sub make_response {
 
-    my ( $self, $code, $message, $json ) = @_;
-    $json //= $self->_ref2json($message);
-    return HTTP::Response->new( $code, $message,
-        [ "Content-Type" => "application/json" ], $json );
+	my ( $self, $code, $message, $json ) = @_;
+	$json //= $self->_ref2json($message);
+	return HTTP::Response->new( $code, $message, [ "Content-Type" => "application/json" ], $json );
 }
 
 sub _json2ref {
@@ -196,12 +192,13 @@ sub _verbose {
 
 sub _make_uri {
 
-    my ( $self, $path_or_uri, $queryref, $other_options ) = @_;
+	my ( $self, $path_or_uri, $queryref, $other_options ) = @_;
 
-    $queryref //= {};
-    if ( $path_or_uri !~ /^https?:\/\// ) {
-        $path_or_uri = sprintf "%s/%s", $self->default_endpoint, $path_or_uri;
-    }
+	$path_or_uri //= "";
+	$queryref //= {};
+	if ($path_or_uri !~ /^https?:\/\//) {
+		$path_or_uri = sprintf "%s/%s", $self->default_endpoint, $path_or_uri;
+	}
 
 	my $apikey;
 	if (ref($other_options) eq "HASH" && exists $other_options->{apikey}) {
@@ -210,9 +207,9 @@ sub _make_uri {
 		$apikey = $self->apikey;
 	}
 
-    my $uri = URI->new($path_or_uri);
-    $uri->query_form( [ apikey => $apikey, %{$queryref} ] );
-    return $uri;
+	my $uri = URI->new($path_or_uri);
+	$uri->query_form( [ apikey => $apikey, %{$queryref} ] );
+	return $uri;
 }
 
 1;
@@ -224,7 +221,7 @@ WWW::Giraffi::API::Request - Giraffi API Access Request Base Module
 
 =head1 VERSION
 
-0.2_03
+0.2_04
 
 =head1 SYNOPSIS
 

@@ -6,7 +6,7 @@ use Time::Piece;
 
 use parent qw(WWW::Giraffi::API::Request);
 
-our $VERSION = '0.2_03';
+our $VERSION = '0.2_04';
 
 sub all {
 
@@ -31,7 +31,6 @@ sub search {
 }
 
 sub create {
-	# no test
     my ( $self, $conditions, $other_options ) = @_;
     return $self->post( sprintf("%s/internal/nodelayed", $self->monitoringdata_endpoint), undef, { internal => $conditions }, $other_options );
 }
@@ -46,7 +45,7 @@ WWW::Giraffi::API::MonitoringData - Giraffi API MonitoringData Method Module
 
 =head1 VERSION
 
-0.2_03
+0.2_04
 
 =head1 SYNOPSIS
 
@@ -194,7 +193,23 @@ Return Array Reference:
 
 =head2 create
 
-no test
+Post MonitoringData
+
+Example:
+
+  my $conditions = {
+    servicetype => "load_average",
+    value       => "5.11",
+    customkey   => "00:00:00:00:00:00",
+    ck_init     => "00:00:00:00:00:00",
+    'tags' => [
+              '1.0.0.1',
+              '00:00:00:00:00:00',
+              'test.priv'
+            ],
+    checked_at   => time
+  };
+  my $data = $monitoringdata->create($conditions);
 
 =head1 AUTHOR
 

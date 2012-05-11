@@ -5,7 +5,7 @@ use warnings;
 
 use parent qw(WWW::Giraffi::API::Request);
 
-our $VERSION = '0.2_03';
+our $VERSION = '0.2_04';
 
 sub all {
 
@@ -68,7 +68,7 @@ WWW::Giraffi::API::Media - Giraffi API Media Method Access Module
 
 =head1 VERSION
 
-0.2_03
+0.2_04
 
 =head1 SYNOPSIS
 
